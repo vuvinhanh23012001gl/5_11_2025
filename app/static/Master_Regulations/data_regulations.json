@@ -1,0 +1,89 @@
+{
+    "SP01": {
+        "0": {
+            "shapes": [
+                {
+                    "color": "blue",
+                    "kich_thuoc_max": 6,
+                    "kich_thuoc_min": 1,
+                    "mode": "min",
+                    "so_diem_dau": 1,
+                    "ten_hinh_min": "1",
+                    "type": "rect",
+                    "x1": 0.411144578313253,
+                    "x2": 0.5308734939759037,
+                    "y1": 0.31204819277108437,
+                    "y2": 0.5036144578313253
+                }
+            ]
+        },
+        "1": {
+            "shapes": [
+                {
+                    "color": "blue",
+                    "kich_thuoc_max": 6,
+                    "kich_thuoc_min": 1,
+                    "mode": "min",
+                    "so_diem_dau": 1,
+                    "ten_hinh_min": "1",
+                    "type": "rect",
+                    "x1": 0.22740963855421686,
+                    "x2": 0.31099397590361444,
+                    "y1": 0.7168674698795181,
+                    "y2": 0.8650602409638555
+                }
+            ]
+        },
+        "2": {
+            "shapes": [
+                {
+                    "color": "blue",
+                    "kich_thuoc_max": 6,
+                    "kich_thuoc_min": 1,
+                    "mode": "min",
+                    "so_diem_dau": 1,
+                    "ten_hinh_min": "1",
+                    "type": "rect",
+                    "x1": 0.5881024096385542,
+                    "x2": 0.6927710843373494,
+                    "y1": 0.28795180722891567,
+                    "y2": 0.43012048192771085
+                }
+            ]
+        },
+        "3": {
+            "shapes": [
+                {
+                    "color": "blue",
+                    "kich_thuoc_max": 6,
+                    "kich_thuoc_min": 1,
+                    "mode": "min",
+                    "so_diem_dau": 1,
+                    "ten_hinh_min": "1",
+                    "type": "rect",
+                    "x1": 0.6686746987951807,
+                    "x2": 0.7853915662650602,
+                    "y1": 0.4867469879518072,
+                    "y2": 0.6253012048192771
+                }
+            ]
+        },
+        "4": {
+            "shapes": [
+                {
+                    "color": "blue",
+                    "kich_thuoc_max": 6,
+                    "kich_thuoc_min": 1,
+                    "mode": "min",
+                    "so_diem_dau": 1,
+                    "ten_hinh_min": "1",
+                    "type": "rect",
+                    "x1": 0.5640060240963856,
+                    "x2": 0.6603915662650602,
+                    "y1": 0.7253012048192771,
+                    "y2": 0.8373493975903614
+                }
+            ]
+        }
+    }
+}
