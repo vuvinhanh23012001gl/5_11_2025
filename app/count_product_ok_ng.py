@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn /  Module Count Product OK/NG
+# Description: Module Count Product OK/NG
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import common_value 
 class Count():
     
@@ -50,6 +60,7 @@ class Count():
             self.NG += value
             self.write_data(self.OK, self.NG)
 
+#==================================Hàm chạy kiểm thử====================================================#
 
 # count_produc  = Count()
 # # oke,ng = count_produc.read_data_in_file()

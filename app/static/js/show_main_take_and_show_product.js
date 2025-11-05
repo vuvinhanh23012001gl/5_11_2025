@@ -27,7 +27,8 @@ import {
   set_index_img_current,
   set_Z_index_canvas_show,canvas_img_show,ctx,canvas_img_show_oke,ctx_oke,logSocket,disableMenu,enableMenu
 } from "./show_main_status.js";
-//logSocket se nhan tin hieu server nhận dữ liệu thành công hiển thị lên log
+
+// logSocket se nhan tin hieu server nhận dữ liệu thành công hiển thị lên log
 // CONSTANT    
 const SCROLL_STEP = 300;
 let index_point_current = 0
@@ -62,6 +63,11 @@ let mode = null;
 let startX = 0, startY = 0, endX = 0, endY = 0;
 let isDrawing = false;
 let is_screen_frame_load_data = true;
+
+btn_square.addEventListener("click", handleSquareBtnClick);
+btn_circle.addEventListener("click", handleCircleBtnClick);
+select_min.addEventListener("click", handleSelectMinClick);
+canvas_img_show.addEventListener("dblclick", handleCanvasDoubleClick);
 
 canvas_img_show.addEventListener("mousedown", handleMouseDown);
 canvas_img_show.addEventListener("mousemove", handleMouseMove);
@@ -99,18 +105,13 @@ function deactivateAllButtons() {
   select_min.classList.remove("active");
 }
 
-
 // ==========================
 // 4. Event Handlers
 // ==========================
 
-// window.addEventListener("beforeunload", function (e) {
-//       e.preventDefault();  
-// });
 function normalizeShapes(data, width, height) {
   // clone để không làm thay đổi data gốc
   const result = JSON.parse(JSON.stringify(data));
-
   for (const key in data) {
     const item = result[key];
     if (!item.shapes) continue; // bỏ qua nếu không có shapes
@@ -138,9 +139,9 @@ function normalizeShapes(data, width, height) {
       }
     });
   }
-
   return result;
 }
+
 
 
 btn_accept_and_send.addEventListener("click",()=>{
@@ -170,10 +171,10 @@ btn_accept_and_send.addEventListener("click",()=>{
     if (!status_oke) {
     log.innerText +=`✍️Tiến hành vẽ bổ sung các quy ước hình còn thiếu`;
     is_oke = false;
-  }
-  //  console.log("--------------------------------------");
-  //  console.log("Kiểm tra tên quy ước hình nhập ");
-  // phan nay se  huy comment sau khi chay ode kia oke
+    }
+    //  console.log("--------------------------------------");
+    //  console.log("Kiểm tra tên quy ước hình nhập ");
+    // phan nay se  huy comment sau khi chay ode kia oke
     for(let j = 0; j<number_img_receive;j++){
       let  dulieu = shapes_all?.[`${j}`]?.shapes;   // danh sach diem dau cua 1 hinh anh
       if (dulieu  == null){continue;}
@@ -221,6 +222,8 @@ btn_accept_and_send.addEventListener("click",()=>{
          postData("/api_take_master/config_master",normalizeShape);
     }
 });
+
+
 function Event_press_left_right() {
     const scroll_width = scroll_content.scrollWidth;
     const scroll_client = scroll_container.clientWidth;
@@ -234,54 +237,54 @@ function Event_press_left_right() {
     }
 }
 
+
 function handleSquareBtnClick() {
-  if (is_square_active) {
+    if (is_square_active) {
+      deactivateAllButtons();
+      check_select = null;
+      return;
+    }
+    if (is_circle_active || is_pentagon_active) {
+      log.innerText = "Lỗi: Chỉ được chọn một hình để vẽ tại một thời điểm";
+      return;
+    }
     deactivateAllButtons();
-    check_select = null;
-    return;
-  }
-  if (is_circle_active || is_pentagon_active) {
-    log.innerText = "Lỗi: Chỉ được chọn một hình để vẽ tại một thời điểm";
-    return;
-  }
-  deactivateAllButtons();
-  is_square_active = true;
-  check_no_Select_shape_1 = 1;
-  btn_square.style.backgroundColor = "#43d9f3";
-  btn_square.style.scale = "1.3";
-  check_select = 1;
-  check_Select_shape = 1;
+    is_square_active = true;
+    check_no_Select_shape_1 = 1;
+    btn_square.style.backgroundColor = "#43d9f3";
+    btn_square.style.scale = "1.3";
+    check_select = 1;
+    check_Select_shape = 1;
 }
 
 function handleCircleBtnClick() {
-  if (is_circle_active) {
+    if (is_circle_active) {
+      deactivateAllButtons();
+      check_select = null;
+      return;
+    }
+    if (is_square_active || is_pentagon_active) {
+      log.innerText = "Lỗi: Chỉ được chọn một hình để vẽ tại một thời điểm";
+      return;
+    }
     deactivateAllButtons();
-    check_select = null;
-    return;
-  }
-  if (is_square_active || is_pentagon_active) {
-    log.innerText = "Lỗi: Chỉ được chọn một hình để vẽ tại một thời điểm";
-    return;
-  }
-  deactivateAllButtons();
-  is_circle_active = true;
-  check_no_Select_shape_2 = 1;
-  btn_circle.style.backgroundColor = "#43d9f3";
-  btn_circle.style.scale = "1.3";
-  check_select = 1;
-  check_Select_shape = 1;
+    is_circle_active = true;
+    check_no_Select_shape_2 = 1;
+    btn_circle.style.backgroundColor = "#43d9f3";
+    btn_circle.style.scale = "1.3";
+    check_select = 1;
+    check_Select_shape = 1;
 }
 
 function handleSelectMinClick() {
-  mode = "min";
-  if (check_select == 0) {
-    log.innerText = "Hãy chọn biên dạng phù hợp";
-    return;
-  }
-  log.innerText = "Tiến hành vẽ đường bao điểm dầu \n";
-  select_min.classList.add("active");
+    mode = "min";
+    if (check_select == 0) {
+      log.innerText = "Hãy chọn biên dạng phù hợp";
+      return;
+    }
+    log.innerText = "Tiến hành vẽ đường bao điểm dầu \n";
+    select_min.classList.add("active");
 }
-
 
 
 function handleCanvasDoubleClick(event) {
@@ -411,113 +414,105 @@ function handleCanvasDoubleClick(event) {
   });
 
   btn_accept.addEventListener("click", () => {
-    const labelToKey = {
-      "Tên khung max": "ten_khung_max",
-      "Số điểm dầu quy định": "so_diem_dau",
-      "Tên hình": "ten_hinh_min",
-      "Kích thước điểm dầu nhỏ nhất": "kich_thuoc_min",
-      "Kích thước điểm dầu lớn nhất": "kich_thuoc_max"
-    };
-
-    // Chỉ các key này mới phải là số nguyên
-    const integerKeys = [
-      "so_diem_dau",
-      "kich_thuoc_min",
-      "kich_thuoc_max"
-    ];
-
-    const rows = table_write_data.querySelectorAll("tr");
-    const data = {};
-    let valid = true;
-    let valid_repeat = true;
-    rows.forEach(row => {
-      const label = row.querySelector("th").innerText;
-      const input = row.querySelector("input");
-      const value = input.value.trim();
-      const key = labelToKey[label] || label;
-
-      // Check trùng tên hình min
-      if (key == "ten_hinh_min") {
-        const existing = shapes.find(shape =>
-          ((shape?.ten_hinh_min) ?? '').trim() === (value ?? '').trim()
-        );
-        if (existing && existing !== foundShape) {
-          valid_repeat = false;
-        }
-      }
-
-      // Check trùng tên khung max
-      if (key == "ten_khung_max") {
-        const existing = shapes.find(shape =>
-          ((shape?.ten_khung_max) ?? '').trim() === (value ?? '').trim()
-        );
-        if (existing && existing !== foundShape) {
-          valid_repeat = false;
-        }
-      }
-
-      // Các trường số nguyên
-      if (integerKeys.includes(key)) {
-        if (!/^-?\d+$/.test(value)) {
-          // Không phải số nguyên
-          input.style.border = "1px solid red";
-          valid = false;
-          return;
-        } else {
-          const numberValue = parseInt(value, 10);
-          if (numberValue < 0) {
-            // Số nguyên nhưng không hợp lệ (<= 0)
-            input.style.border = "1px solid red";
-            input.value = 0;
-            valid = false;
-            return;
+        const labelToKey = {
+          "Tên khung max": "ten_khung_max",
+          "Số điểm dầu quy định": "so_diem_dau",
+          "Tên hình": "ten_hinh_min",
+          "Kích thước điểm dầu nhỏ nhất": "kich_thuoc_min",
+          "Kích thước điểm dầu lớn nhất": "kich_thuoc_max"
+        };
+        // Chỉ các key này mới phải là số nguyên
+        const integerKeys = [
+          "so_diem_dau",
+          "kich_thuoc_min",
+          "kich_thuoc_max"
+        ];
+        const rows = table_write_data.querySelectorAll("tr");
+        const data = {};
+        let valid = true;
+        let valid_repeat = true;
+        rows.forEach(row => {
+          const label = row.querySelector("th").innerText;
+          const input = row.querySelector("input");
+          const value = input.value.trim();
+          const key = labelToKey[label] || label;
+          // Check trùng tên hình min
+          if (key == "ten_hinh_min") {
+            const existing = shapes.find(shape =>
+              ((shape?.ten_hinh_min) ?? '').trim() === (value ?? '').trim()
+            );
+            if (existing && existing !== foundShape) {
+              valid_repeat = false;
+            }
           }
-          // Hợp lệ
+          // Check trùng tên khung max
+          if (key == "ten_khung_max") {
+            const existing = shapes.find(shape =>
+              ((shape?.ten_khung_max) ?? '').trim() === (value ?? '').trim()
+            );
+            if (existing && existing !== foundShape) {
+              valid_repeat = false;
+            }
+          }
+          // Các trường số nguyên
+          if (integerKeys.includes(key)) {
+            if (!/^-?\d+$/.test(value)) {
+              // Không phải số nguyên
+              input.style.border = "1px solid red";
+              valid = false;
+              return;
+            } else {
+              const numberValue = parseInt(value, 10);
+              if (numberValue < 0) {
+                // Số nguyên nhưng không hợp lệ (<= 0)
+                input.style.border = "1px solid red";
+                input.value = 0;
+                valid = false;
+                return;
+              }
+              // Hợp lệ
+              input.style.border = "";
+              data[key] = numberValue;
+              return;
+            }
+          }
+          // Các trường khác (string)
           input.style.border = "";
-          data[key] = numberValue;
+          data[key] = value;
+        });
+        // Sau khi duyệt xong tất cả row
+        if (!valid) {
+          alert("Bạn cần nhập số nguyên dương (> 0) ở các ô bị đánh dấu đỏ!");
           return;
         }
-      }
-
-      // Các trường khác (string)
-      input.style.border = "";
-      data[key] = value;
-    });
-
-    // Sau khi duyệt xong tất cả row
-    if (!valid) {
-      alert("Bạn cần nhập số nguyên dương (> 0) ở các ô bị đánh dấu đỏ!");
-      return;
-    }
-    if (!valid_repeat) {
-      undo_shapes();
-      hidden_table_and_button(table_write_data, part_table_log);
-      alert("Tên hình/khung đã tồn tại! Hãy vẽ lại hình và đặt tên khác");
-      return;
-    }
-    const text = data.ten_khung_max || data.ten_hinh_min || "Không có nội dung";
-    writeLabelWitdthGet(foundShape, text, foundShape.x1, foundShape.y1);
-
-    for(let j of shapes){
-      if(foundShape == j){
-        if (text == data.ten_khung_max){
-          j["ten_khung_max"] = text;
-          j["so_diem_dau"] = data.so_diem_dau; 
+        if (!valid_repeat) {
+          undo_shapes();
+          hidden_table_and_button(table_write_data, part_table_log);
+          alert("Tên hình/khung đã tồn tại! Hãy vẽ lại hình và đặt tên khác");
+          return;
         }
-        if(text == data.ten_hinh_min){
-          j["ten_hinh_min"] = data.ten_hinh_min;
-          j["so_diem_dau"] = data.so_diem_dau;
-          j["kich_thuoc_min"] = data.kich_thuoc_min;
-          j["kich_thuoc_max"] = data.kich_thuoc_max;
-        }
-      }
-    }
+        const text = data.ten_khung_max || data.ten_hinh_min || "Không có nội dung";
+        writeLabelWitdthGet(foundShape, text, foundShape.x1, foundShape.y1);
 
-    log.innerHTML = `✔️ Tạo quy ước thành điểm thành công \n👆Nhấn giữ chuột trái để xoay hình\n👆Nhấn giữ chuột phải để di chuyển hình\n--👉Chọn vẽ đường bao điểm`;
-    redrawAll();
-    hidden_table_and_button(table_write_data,part_table_log);
+        for(let j of shapes){
+          if(foundShape == j){
+            if (text == data.ten_khung_max){
+              j["ten_khung_max"] = text;
+              j["so_diem_dau"] = data.so_diem_dau; 
+            }
+            if(text == data.ten_hinh_min){
+              j["ten_hinh_min"] = data.ten_hinh_min;
+              j["so_diem_dau"] = data.so_diem_dau;
+              j["kich_thuoc_min"] = data.kich_thuoc_min;
+              j["kich_thuoc_max"] = data.kich_thuoc_max;
+            }
+          }
+        }
+
+        log.innerHTML = `✔️ Tạo quy ước thành điểm thành công \n👆Nhấn giữ chuột trái để xoay hình\n👆Nhấn giữ chuột phải để di chuyển hình\n--👉Chọn vẽ đường bao điểm`;
+        redrawAll();
+        hidden_table_and_button(table_write_data,part_table_log);
   });
-
   const div = document.createElement("div");
   div.className = "btn-container";
   div.style.display = "flex";
@@ -537,6 +532,8 @@ function hidden_table_and_button(table_write_data,part_table_log){
       part_table_log.removeChild(btnContainer);
   }
 }
+
+
 function writeLabelWitdthGet(shape, string, coordinate_x, coordinate_y) {
   ctx.font = "18px Arial";
 
@@ -568,6 +565,7 @@ function writeLabelWitdthGet(shape, string, coordinate_x, coordinate_y) {
 // ==========================
 // 5. Event Listeners
 // ==========================
+
 btn_close.addEventListener("click",function(){
    enableMenu();// bật lên khi nhấn thoát
    postData("api_take_master/master_close", { "status": "on" }).then(data => {
@@ -589,10 +587,10 @@ function split_data_shapes(data){
    is_screen_frame_load_data = true;
    console.log("Shape khi nhan vao nut take master",shapes_all);
 }
+
 function denormalizeShapes(data, width, height) {
   // clone để không thay đổi data gốc
   const result = JSON.parse(JSON.stringify(data));
-
   for (const key in result) {
     const item = result[key];
     if (!item.shapes) continue;
@@ -618,7 +616,6 @@ function denormalizeShapes(data, width, height) {
       }
     });
   }
-
   return result;
 }
 
@@ -703,10 +700,7 @@ btn_right.addEventListener("click", () => {
 });
 scroll_container.addEventListener("scroll", Event_press_left_right);
 
-btn_square.addEventListener("click", handleSquareBtnClick);
-btn_circle.addEventListener("click", handleCircleBtnClick);
-select_min.addEventListener("click", handleSelectMinClick);
-canvas_img_show.addEventListener("dblclick", handleCanvasDoubleClick);
+
 
 function delete_page_img(index) {
     if (shapes_all.hasOwnProperty(`${index}`)) {
@@ -1084,59 +1078,60 @@ function handleMouseMove(event) {
 }
 
 function handleMouseUp(event) {
-  if (event.button === 2 && isDraggingRectWithRightClick) {
-    isDraggingRectWithRightClick = false;
-    draggingRectIndex = -1;
-    event.preventDefault();
-    return;
-  }
-  if (isRotating) {
-    isRotating = false;
-    hoveredRectIndex = -1;
-    event.preventDefault();
-    return;
-  }
-  if (isDraggingCircle) {
-    isDraggingCircle = false;
-    hoveredCircleIndex = -1;
-    event.preventDefault();
-    return;
-  }
-  if (!isDrawing) return;
+    if (event.button === 2 && isDraggingRectWithRightClick) {
+      isDraggingRectWithRightClick = false;
+      draggingRectIndex = -1;
+      event.preventDefault();
+      return;
+    }
+    if (isRotating) {
+      isRotating = false;
+      hoveredRectIndex = -1;
+      event.preventDefault();
+      return;
+    }
+    if (isDraggingCircle) {
+      isDraggingCircle = false;
+      hoveredCircleIndex = -1;
+      event.preventDefault();
+      return;
+    }
+    if (!isDrawing) return;
 
-  isDrawing = false;
-  const color = mode === 'min' ? 'blue' : 'red';
+    isDrawing = false;
+    const color = mode === 'min' ? 'blue' : 'red';
 
-let newShape = null;
-if (is_square_active) {
-  newShape = { type: "rect", x1: startX, y1: startY, x2: endX, y2: endY, mode, color };
-} else if (is_circle_active) {
-  const radius = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
-  newShape = { type: "circle", cx: startX, cy: startY, r: radius, mode, color };
-}
-const added = addShape(newShape);
-if (newShape) {
-  
-  if (added) {
+    let newShape = null;
+    if (is_square_active) {
+      newShape = { type: "rect", x1: startX, y1: startY, x2: endX, y2: endY, mode, color };
+    } else if (is_circle_active) {
+      const radius = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
+      newShape = { type: "circle", cx: startX, cy: startY, r: radius, mode, color };
+    }
+    const added = addShape(newShape);
+    if (newShape) {
+      
+      if (added) {
+        const lastShape = shapes[shapes.length - 1];
+        const shapeType = lastShape.type === "rect" ? "hình chữ nhật" : "hình tròn";
+        log.textContent = `🖍 Đã vẽ ${shapeType}.\n🖍 Nhấn đúp chuột trái vào viền ${shapeType} để thêm thông tin`;
+        
+      }
+      
+    }
+    redrawAll();
     const lastShape = shapes[shapes.length - 1];
     const shapeType = lastShape.type === "rect" ? "hình chữ nhật" : "hình tròn";
     log.textContent = `🖍 Đã vẽ ${shapeType}.\n🖍 Nhấn đúp chuột trái vào viền ${shapeType} để thêm thông tin`;
-    
-  }
-  
-}
-  redrawAll();
-  const lastShape = shapes[shapes.length - 1];
-  const shapeType = lastShape.type === "rect" ? "hình chữ nhật" : "hình tròn";
-  log.textContent = `🖍 Đã vẽ ${shapeType}.\n🖍 Nhấn đúp chuột trái vào viền ${shapeType} để thêm thông tin`;
-  if(added === false){
-    log.innerText = `❌Trong 1 hình chỉ cho phép 1 khung MAX`;
-  }
+    if(added === false){
+      log.innerText = `❌Trong 1 hình chỉ cho phép 1 khung MAX`;
+    }
 }
 
 // =========================
 // 5. NÚT CHỨC NĂNG
 // =========================
+
 btn_undo.addEventListener("click", () => {
   if (shapes.length > 0) {
     let lastIndex = shapes.length - 1;
@@ -1155,6 +1150,33 @@ btn_erase.addEventListener("click", () => {
   redrawAll();
   log.textContent = "🗑 Đã xóa tất cả hình.\n";
 });
+
+out_app.addEventListener('click', ()=>{
+  try {
+    // Gửi tín hiệu cho server dừng
+    postData("/api_out_app/process_out_app", { "status": "on" });
+
+    // ✅ Không dùng window.close, chỉ chuyển sang trắng
+    window.location.replace("about:blank");
+
+    // Ngăn người dùng quay lại
+    setTimeout(()=>{
+      history.pushState(null, null, "about:blank");
+      window.addEventListener("popstate", ()=>{
+        history.pushState(null, null, "about:blank");
+      });
+    }, 100);
+
+  } catch (e) {
+    window.location.replace("about:blank");
+  }
+});
+
+add_product.addEventListener("click",function(){
+    window.location.href = "/api_new_product/add";
+    history.replaceState(null, "", "/api_new_product/add");
+})
+
 
 //Kiem tra so luong max co giong voi so luong min khong
 //---------------------------------------------------------------
@@ -1184,12 +1206,11 @@ btn_check.addEventListener("click", () => {
           }
           }
 
-        }
-//Kiem tra dien ten hay chua 
-  
-     // danh sach diem dau cua 1 hinh anh
-      console.log("du lieu la",shapes);
-      for (let i of shapes){
+    }
+    //Kiem tra dien ten hay chua 
+    // danh sach diem dau cua 1 hinh anh
+    console.log("du lieu la",shapes);
+    for (let i of shapes){
         console.log("doi tuong kla",i);
         let ten_max = i?.ten_khung_max||"";
         let ten_min = i?.ten_hinh_min ||"";
@@ -1198,80 +1219,65 @@ btn_check.addEventListener("click", () => {
           log.innerText  = "❌Chưa đặt đầy đủ tên hình,khung.\n🖍Hãy ghi tên đầy đủ"
           return;
         }
-      }
-    
-    
-
-
-
-
-
-
-
-
-  console.log(`Nhấn vào nút nhấn check hình`);
-  console.log(`Số lượng hình: ${shapes.length}`);
-  if (shapes.length === 0) {
+    }
+    console.log(`Nhấn vào nút nhấn check hình`);
+    console.log(`Số lượng hình: ${shapes.length}`);
+    if (shapes.length === 0) {
     console.log("❌Chưa vẽ hình nào!\n✏ Hãy vẽ thêm!");
     log.innerText = "❌Chưa vẽ hình nào!\n✏ Hãy vẽ thêm!";
     return;
-  }
-
-  const list_min = shapes.filter(s => s.mode == "min");
-  const list_max = shapes.filter(s => s.mode == "max");
-
-  console.log("----------------------------------------------------------------");
-  console.log("Danh sách MIN:", list_min);
-  console.log("----------------------------------------------------------------");
-  console.log("Danh sách MAX:", list_max);
-  console.log("----------------------------------------------------------------");
-
-  let all_ok = true;
-
-  for (let i = 0; i < list_min.length; i++) {
-    const min = list_min[i];
-    let inside_some_max = false;
-    for (let j = 0; j < list_max.length; j++) {
-      const max = list_max[j];
-      let contained = false;
-      if (min.type === "rect" && max.type === "rect") {
-        contained = isRectInRect(min, max);
-      } 
-      else if (min.type === "circle" && max.type === "circle") {
-        contained = isCircleInCircle(min, max);
-      } 
-      else if (min.type === "rect" && max.type === "circle") {
-        contained = isRectInCircle(min, max);
-      } 
-      else if (min.type === "circle" && max.type === "rect") {
-        contained = isCircleInRect(min, max);
-      }
-
-      if (contained) {
-        inside_some_max = true;
-        console.log(`✅ Min ${min.type} #${i + 1} nằm trọn trong Max ${max.type} #${j + 1}`);
-        break;
-      }
     }
 
-    if (!inside_some_max) {
-      console.log(`❌ Min ${min.type} #${i + 1} KHÔNG nằm trọn trong bất kỳ Max nào!`);
-      all_ok = false;
+    const list_min = shapes.filter(s => s.mode == "min");
+    const list_max = shapes.filter(s => s.mode == "max");
+
+    console.log("----------------------------------------------------------------");
+    console.log("Danh sách MIN:", list_min);
+    console.log("----------------------------------------------------------------");
+    console.log("Danh sách MAX:", list_max);
+    console.log("----------------------------------------------------------------");
+
+    let all_ok = true;
+
+    for (let i = 0; i < list_min.length; i++) {
+      const min = list_min[i];
+      let inside_some_max = false;
+      for (let j = 0; j < list_max.length; j++) {
+        const max = list_max[j];
+        let contained = false;
+        if (min.type === "rect" && max.type === "rect") {
+          contained = isRectInRect(min, max);
+        } 
+        else if (min.type === "circle" && max.type === "circle") {
+          contained = isCircleInCircle(min, max);
+        } 
+        else if (min.type === "rect" && max.type === "circle") {
+          contained = isRectInCircle(min, max);
+        } 
+        else if (min.type === "circle" && max.type === "rect") {
+          contained = isCircleInRect(min, max);
+        }
+
+        if (contained) {
+          inside_some_max = true;
+          console.log(`✅ Min ${min.type} #${i + 1} nằm trọn trong Max ${max.type} #${j + 1}`);
+          break;
+        }
+      }
+
+      if (!inside_some_max) {
+        console.log(`❌ Min ${min.type} #${i + 1} KHÔNG nằm trọn trong bất kỳ Max nào!`);
+        all_ok = false;
+      }
     }
-  }
-  if(list_max.length === 0){
-    log.innerText = "✅ OK không tìm thấy lỗi";
-    return;
-  }
-  log.innerText = all_ok
+    if(list_max.length === 0){
+      log.innerText = "✅ OK không tìm thấy lỗi";
+      return;
+    }
+    log.innerText = all_ok
     ? "✅ OK không tìm thấy lỗi"
     : "❌Điểm dầu không được nằm ngoài phạm vi hình khối";
 });
-
-
-// ================== Các hàm check ==================
-
-// ================== Các hàm check ==================
 
 // Check điểm nằm trong polygon (corners có xoay)
 function pointInPolygon(point, polygon) {
@@ -1310,7 +1316,6 @@ function isRectInRect(inner, outer) {
     { x: Math.max(inner.x1, inner.x2), y: Math.min(inner.y1, inner.y2) },
     { x: Math.max(inner.x1, inner.x2), y: Math.max(inner.y1, inner.y2) }
   ];
-
   return innerCorners.every(p => p.x >= ox1 && p.x <= ox2 && p.y >= oy1 && p.y <= oy2);
 }
 
@@ -1321,7 +1326,6 @@ function isCircleInCircle(inner, outer) {
   const distance = Math.sqrt(dx * dx + dy * dy);
   return distance + inner.r <= outer.r;
 }
-
 // Rect trong Circle
 function isRectInCircle(rect, circle) {
   const corners = rect.corners || [
@@ -1376,32 +1380,3 @@ function addShape(shape) {
   shapes.push(shape);
   return true;
 }
-
-
-out_app.addEventListener('click', ()=>{
-  try {
-    // Gửi tín hiệu cho server dừng
-    postData("/api_out_app/process_out_app", { "status": "on" });
-
-    // ✅ Không dùng window.close, chỉ chuyển sang trắng
-    window.location.replace("about:blank");
-
-    // Ngăn người dùng quay lại
-    setTimeout(()=>{
-      history.pushState(null, null, "about:blank");
-      window.addEventListener("popstate", ()=>{
-        history.pushState(null, null, "about:blank");
-      });
-    }, 100);
-
-  } catch (e) {
-    window.location.replace("about:blank");
-  }
-});
-
-
-add_product.addEventListener("click",function(){
-    window.location.href = "/api_new_product/add";
-    history.replaceState(null, "", "/api_new_product/add");
-})
-

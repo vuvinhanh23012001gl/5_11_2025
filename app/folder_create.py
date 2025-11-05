@@ -1,3 +1,14 @@
+
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn /  Module Folder
+# Description: Manager Folder
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 from datetime import datetime
 from typing import Dict,Any
 from pathlib import Path

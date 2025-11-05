@@ -1,4 +1,14 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module manager serial com
+# Description: Manager serial com
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import threading
 import time
 import queue
@@ -266,11 +276,11 @@ class ManagerSerial:
         return dict_data 
     
         
-
+#==================================Hàm chạy kiểm thử====================================================#
 # -------------------------------
 # Ví dụ chạy trực tiếp
 # -------------------------------
-# ms = ManagerSerial(queue_tx_web_main ,queue_rx_web_main)
+# ms = ManagerSerial(queue_tx_web_main)
 # def listen_update():
 #         """Luồng phụ: chờ nhấn Enter để đổi COM"""
 #         while True:
@@ -280,8 +290,8 @@ class ManagerSerial:
 # update_thread = threading.Thread(target=listen_update, daemon=False)
 # update_thread.start()
 
-# from shared_queue import queue_tx_web_main,queue_rx_web_main;
-# ms = ManagerSerial(queue_tx_web_main ,queue_rx_web_main)      
+# from shared_queue import queue_tx_web_main;
+# ms = ManagerSerial(queue_tx_web_main )      
 
 
 

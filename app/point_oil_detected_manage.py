@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module oil detect
+# Description: Manager oil detect
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 from point_oil_detected import point_oil_detect
 import matplotlib.pyplot as plt
 import numpy as np
@@ -214,7 +224,7 @@ class Manage_Point_Oil_Detect:
             print(arr_int)
 
 
-                        
+#==================================Hàm chạy kiểm thử====================================================#                   
 
 # manager = Manage_Point_Oil_Detect()
 # manager.area_correction(1)

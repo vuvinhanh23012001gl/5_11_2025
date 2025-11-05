@@ -1,4 +1,14 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module serial
+# Description:  Open,send function,receive function
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import serial.tools.list_ports
 from folder_create import Create
 from common_value import NAME_FOLDER_CONFIG
@@ -266,7 +276,7 @@ class Serial_Com:
         self.Init()
 
 
-     
+#==================================Hàm chạy kiểm thử====================================================# 
                
 # serial_com = Serial_Com()
 # serial_com.open_port()

@@ -1,7 +1,15 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module put log
+# Description: Process put log
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import queue
 from  shared_queue import queue_log
-
-
 
 """Truyền LLog data có dạng như sau
 nếu là log img thì:

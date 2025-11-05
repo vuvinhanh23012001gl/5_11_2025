@@ -1,4 +1,14 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module log
+# Description: Module log
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import threading
 from datetime import datetime
 from openpyxl import Workbook, load_workbook
@@ -188,6 +198,7 @@ class Log:
                 self.disable_file()
 
 
+#==================================Hàm chạy kiểm thử====================================================#
 
 
 # from config_software import OilDetectionSystem
@@ -351,6 +362,8 @@ class log_excell:
             debug_print("🔴 Tắt log Excel (realtime cập nhật)")
             self.path_file_save_log_excell = None
 
+#==================================Hàm chạy kiểm thử====================================================#
+
 # from config_software import OilDetectionSystem
 # obj_config_software = OilDetectionSystem()
 # test_obj_log_excell = log_excell(obj_config_software)
@@ -426,6 +439,8 @@ class log_img:
             else:
                 debug_print("🔴 Tắt log ảnh (ngừng lưu ảnh).")
             self.enabled = new_state
+            
+#==================================Hàm chạy kiểm thử====================================================#
 
     
 # from config_software import OilDetectionSystem
@@ -579,6 +594,7 @@ class Manager_Log:
         except Exception as e:
             debug_print(f"⚠️ Lỗi khi xóa queue_log: {e}")
 
+#==================================Hàm chạy kiểm thử====================================================#
 
 # from config_software import OilDetectionSystem
 # obj_config_software = OilDetectionSystem()

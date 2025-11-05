@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module config software
+# Description:  Module config software
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 from folder_create import Create
 from common_value import NAME_FILE_IMG_RETRAINING, NAME_FOLDER_CONFIG
 from obj_log import safe_put_queue,debug_print
@@ -261,7 +271,8 @@ class OilDetectionSystem:
         debug_print(f"   • File Excel: {info_log_time['excel']} ngày")
         return info_log_time
 
-    
+#==================================Hàm chạy kiểm thử====================================================#
+
 # ==== Ví dụ sử dụng ====
 # object_infor_software = OilDetectionSystem()
 # object_infor_software.update_open_btn(1,1,1,1,1,1,1)

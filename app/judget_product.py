@@ -1,6 +1,15 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn /  Module Judment product
+# Description: Module Judment product
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 from point_oil_detected_manage import Manage_Point_Oil_Detect
-
 from master_circle_shape import  Master_Circle_Shape
 from master_rect_shape import  Master_Rect_Shape
 from obj_log import safe_put_queue,debug_print
@@ -347,7 +356,9 @@ class Judget_Product:
                             cv2.LINE_AA)
         return result
        
-    
+
+#==================================Hàm chạy kiểm thử====================================================#
+ 
 # index_picture  =  4
 # PATH_MODEL = r"C:\Users\anhuv\Desktop\26_08\25-08\app\app\static\Master_Photo\Master_SP01\img_4.png"  
 # img = cv2.imread(PATH_MODEL)  

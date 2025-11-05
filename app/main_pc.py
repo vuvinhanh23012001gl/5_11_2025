@@ -1,4 +1,14 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module driver
+# Description: Module driver
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import common_value
 import common_object
 import shared_queue
@@ -95,7 +105,6 @@ def fuc_main_process():
         else:
             common_value.status_check_connect_arm = False
             common_value.the_first_connect = True
-            func.clear_queue(shared_queue.queue_rx_web_main)
             time.sleep(1)
             debug_print("❌ Không tìm thấy cổng Serial. Vui lòng kiểm tra kết nối.")
             

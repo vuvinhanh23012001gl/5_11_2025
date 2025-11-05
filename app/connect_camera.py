@@ -1,4 +1,15 @@
-from shared_queue import process_capture_detect
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module Camera connet
+# Description: Connect,send,capturn,video
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+
+from shared_queue import queue_process_capture_detect
 from obj_log import safe_put_queue,debug_print
 from folder_create import Create
 from pypylon import pylon
@@ -178,7 +189,7 @@ class BaslerCamera:
                             if capture_detect!= -1:
                                 debug_print("Chụp ảnh nhận diện")
                                 try:
-                                    process_capture_detect.put(frame,block=True,timeout=1)
+                                    queue_process_capture_detect.put(frame,block=True,timeout=1)
                                 except:
                                     debug_print("Queue đầy không chụp được ảnh")
             grabResult.Release()
@@ -417,7 +428,8 @@ class BaslerCamera:
         return None
     
 
-    
+#==================================Hàm chạy kiểm thử====================================================#
+
 # def main():
 #     cam = BaslerCamera(config_file="Camera_25129678.pfs")
 #     # print(cam.is_camera_stable())

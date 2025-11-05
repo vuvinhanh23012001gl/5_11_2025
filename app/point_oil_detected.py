@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module oil detect
+# Description: Macro oil detect
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import cv2
 import numpy as np
 from obj_log import safe_put_queue,debug_print
@@ -149,6 +159,23 @@ class point_oil_detect:
             "area_reality": self.reality_area,
             "area_calculate": self.area_calculate,
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+#==================================Hàm chạy kiểm thử====================================================#
     # def get_conf(self):
     #     print("Contour border xy:", self.contour_border_xy)
     #     return self.contour_border_xy

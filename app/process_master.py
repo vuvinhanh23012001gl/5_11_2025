@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module process master
+# Description: Master
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
 import json
 from folder_create import Create
 from common_value import NAME_FILE_STATIC
@@ -237,7 +247,7 @@ class Proces_Shape_Master():
             else:
                 debug_print("ID này chưa tạo master regulation")
                 return False
-
+#==================================Hàm chạy kiểm thử====================================================#
 
 # shape = Proces_Shape_Master()
 # shape.erase_master_index("SP01",0)

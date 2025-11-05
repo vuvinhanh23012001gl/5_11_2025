@@ -1,4 +1,15 @@
-from  shared_queue import queue_accept_capture,queue_tx_web_main,process_capture_detect,queue_tx_web_log
+
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn /  Module Function utilities
+# Description: Function utilities
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+from  shared_queue import queue_accept_capture,queue_tx_web_main,queue_process_capture_detect,queue_tx_web_log
 from obj_log import safe_put_queue,debug_print
 import threading
 import time
@@ -127,7 +138,7 @@ def run_and_capture(ID,List_point,judget_product,object_shape_master,obj_manager
         status_send_arm = wait_for_specific_data(obj_manager_serial,from_data_send_run)
         if status_send_arm and data_one_point_master:
                 queue_accept_capture.put({"training":3,"capture_detect":1})
-                process_multi_thread(process_capture_detect,queue_tx_web_main,judget_product,i,List_point,data_one_point_master,length_list_point,time_start)
+                process_multi_thread(queue_process_capture_detect,queue_tx_web_main,judget_product,i,List_point,data_one_point_master,length_list_point,time_start)
         if not status_send_arm:
             # queue_tx_web_log.put("❌[ERRO]Đợi tín hiệu phản hồi từ ARM lỗi!")
             debug_print("❌[ERRO]Đợi tín hiệu phản hồi từ ARM lỗi!")

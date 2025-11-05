@@ -1,4 +1,15 @@
 
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module request API client
+# Description: API request clinet
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+
 from flask import Blueprint,render_template,request,jsonify,send_file,redirect, url_for
 import common_object
 from datetime import datetime

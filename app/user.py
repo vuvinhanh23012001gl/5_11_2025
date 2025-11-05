@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module Account
+# Description: Log in ,Sign in,Create User,admin
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+
 from folder_create import Create
 import common_value
 from obj_log import safe_put_queue,debug_print
@@ -6,6 +17,7 @@ PASSWORD_ADMIN = "BIVNRDP"
 
 
 class acc_use():
+    """Lớp này dành cho User"""
     def __init__(self,user_name ="None",use_password="None",first_name="None",last_name="None",line="None",usine="None"):
         self.id = None
         self.first_name = first_name
@@ -40,6 +52,7 @@ class acc_use():
 # user.show_infor_user()
 
 class acc_admmin():
+    """Lớp này dành cho Admin"""
     def __init__(self,admin_name = USER_ADMIN,admin_password=PASSWORD_ADMIN):
         self.admin_name = admin_name
         self.admin_password = admin_password
@@ -55,8 +68,9 @@ class acc_admmin():
         }
 
 class Manage_User():
+    """Lớp này là lớp quản lý tài khoản user và admin"""
     object_folder =  Create()
-    NAME_FILE_JSON_USER  = "acc_user.json"
+    NAME_FILE_JSON_USER  = "acc_user.json" 
     NAME_FILE_JSON_ADMIN =  "acc_admin.json"
     path_admin = object_folder.get_path_grandaugter(NAME_FILE_JSON_ADMIN,common_value.NAME_FOLDER_USER,common_value.NAME_FILE_STATIC)
     path_user = object_folder.get_path_grandaugter(NAME_FILE_JSON_USER,common_value.NAME_FOLDER_USER,common_value.NAME_FILE_STATIC)
@@ -65,6 +79,7 @@ class Manage_User():
         self.data_admin = {}
         self.current_account = {}  #Trả về thông tin người hiện tại đăng nhập
     def create_user(self, user_name:str=None, use_password:str=None, first_name:str=None, last_name:str=None, line:str=None, usine:str=None):
+        """Hàm này tạo ra tài khoản user"""
         if not all([user_name, use_password, first_name, last_name, line, usine]):
             debug_print("Thiếu dữ liệu khi tạo tài khoản User")
             return False,"Thiếu dữ liệu khi tạo tài khoản"
@@ -115,6 +130,7 @@ class Manage_User():
         debug_print(f"Xóa user {user_name} thành công")
         return True
     def create_admin(self, admin_name: str = "", admin_password: str = None):
+        """Hàm này tạo ra tài khoản admin"""
         if not all([admin_name,admin_password]):
             debug_print("Thiếu dữ liệu khi tạo tài khoản Admin tạo tài khoản admin mặc định")
             obj_acc_admmin = acc_admmin()
@@ -215,6 +231,7 @@ class Manage_User():
             return {}
 
 
+#==================================Hàm chạy kiểm thử====================================================#
 # manager_one = Manage_User()
 # # debug_print(manager_one.get_account_info_by_name("3"))
 # debug_print(manager_one.check_account("3","1"))

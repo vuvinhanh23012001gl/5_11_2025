@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module Product
+# Description: Macro product
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+
 from point_oil import PointOil
 from common_value import NAME_FILE_STATIC
 from obj_log import safe_put_queue,debug_print
@@ -152,7 +163,11 @@ class ProductType:
         else:
             debug_print(f"❌ Index {index} không hợp lệ. Độ dài hiện tại: {len(self.list_point)}")
             return False
-         
+
+
+
+#==================================Hàm chạy kiểm thử====================================================#
+
 # Loai_1  = ProductType("1", "Loại A",[1,2,3])
 # Loai_1.add_list_point(1, 2, 3, 10)
 # Loai_1.add_list_point(1, 2, 3, 10)

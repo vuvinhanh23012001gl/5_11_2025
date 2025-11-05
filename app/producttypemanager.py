@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# Title      : Check OIL bivn / Module manager product
+# Description: add,erase,get,edit product
+# Author     : Vu Vinh Anh
+# Email      : anh.vu@example.com
+# Created    : 2025-06-30
+# Version    : 0.1
+# License    : MIT
+# -----------------------------------------------------------------------------
+
 from producttype import ProductType
 from typing import Dict,Any,List
 from folder_create import Create
@@ -517,7 +528,8 @@ class ProductTypeManager:
 
 
 
-# #----------------------------------------------------------------------------------------------------------------------------
+#==================================Hàm chạy kiểm thử====================================================#
+
 # quanly = ProductTypeManager()
 # quanly.remove_data_index_of_product("SP01",3)
 
